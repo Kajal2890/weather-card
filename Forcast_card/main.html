@@ -1,0 +1,40 @@
+<!DOCTYPE html> 
+<html>
+    <head lang="en">
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <meta charset="UTF-8">
+        <title></title>
+     </head>
+    <body>
+        <div class="container">
+            <div class="card">
+                <input id="txt_city" type="text" placeholder="city" required>
+                <button id="mybtn">fetch it</button>
+                <div id="info">
+                <div class="city"></div>
+                <div class="date"></div>
+                <div class="temp"></div>
+            </div>
+        </div>
+        </div>
+         <script>
+        document.getElementById("mybtn").onclick = () => {
+           let city =   document.getElementById("txt_city").value;
+            fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=eeabdf17b8481b3ae09685b8a00e84c0`)
+            .then(data =>{
+               return data.json()
+            }).then(data2 =>{
+                // console.log(data2.name);
+                // console.log(data2.main.temp);
+                // console.log(data2.weather[0].description);
+                 document.getElementById("info").innerHTML = 
+                 `<div class="city">${data2.name}</div>
+                <div class="date">${data2.weather[0].description}</div>
+                <div class="temp">${data2.main.temp}</div>`
+            }).catch(err =>{
+              console.log(err)  
+            })
+        }
+    </script>
+    </body>
+    </html>
